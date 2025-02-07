@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script type="module" defer src="components/countdowntimer.js"></script>
+</head>
+<body>
+    <countdown-timer></countdown-timer>
+
+
+
+    <script>
+   
+        document.addEventListener("event--here", (e) => {
+            console.log(`Event '${e.type}' fired`);
+        })
+
+/*
+        const customEvent = new Event("event--here");
+    document.dispatchEvent(customEvent);
+*/
+    </script>
+</body>
+</html>
