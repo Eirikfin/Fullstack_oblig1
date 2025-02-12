@@ -11,6 +11,7 @@ export default class Racehorse extends HTMLElement{
         this.keyInput = this.getAttribute("key");
         this.position = 0;
         this.raceStarted = false;
+        this.raceFinished = false;
 
 
         this.attachShadow({mode: "open"})
@@ -48,6 +49,10 @@ export default class Racehorse extends HTMLElement{
             this.raceStarted = true;
         })
 
+        document.addEventListener("race-finished", () => {
+            this.raceStarted = false;
+        })
+
         document.addEventListener("keyup", (e) => {
           
           if(this.raceStarted && e.key === this.keyInput){
@@ -57,8 +62,10 @@ export default class Racehorse extends HTMLElement{
         })
     }
     finishRace(){
-        if(this.position > 80){
-            return fireEvent("race-finished")
+        if(!this.raceFinished && this.position > 80){
+            this.raceFinished = true;
+            fireEvent("race-finished");
+           
         } else{
             return
         }

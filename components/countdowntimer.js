@@ -24,6 +24,8 @@ export default class CountdownTimer extends HTMLElement {
     // adding eventlistener:
     this.startBtn.addEventListener("click", () =>{this.startRace()});
     this.resetBtn.addEventListener("click", () =>{this.resetTimer()});
+    
+    document.addEventListener("race-finished", () => {this.stopTimer()});
     }
     // methods:
 
@@ -55,6 +57,10 @@ export default class CountdownTimer extends HTMLElement {
       }, 10);
       
     
+    }
+
+    stopTimer() {
+      clearInterval(this.runningTime);
     }
 
     resetTimer(){
