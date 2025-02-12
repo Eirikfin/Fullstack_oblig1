@@ -27,19 +27,20 @@ export default class CountdownTimer extends HTMLElement {
     }
     // methods:
     startRace() {
-    
+        //disable button when it is clicked
         this.startBtn.disabled = true;
        
     
-        // Show "ready, set, GO!" messages before starting the timer
+       //start the countdown
         const countdownInterval = setInterval(() => {
+          //check if countdown is bigger than 0:
           if (this.countDown > 0){
-            this.countDownMsg.textContent = this.countDown;
-            this.countDown--;
-          
+            this.countDownMsg.textContent = this.countDown; //display time
+            this.countDown--; // reduce countdown with 1
+          //if no longer true clear interval
           } else {
             clearInterval(countdownInterval);
-            this.countDownMsg.textContent = ""; // Clear message after GO!
+            this.countDownMsg.textContent = "GO!!"; // Race start message
             this.startTimer(); // Start the main timer
           }
         }, 1000);
@@ -60,7 +61,7 @@ export default class CountdownTimer extends HTMLElement {
         clearInterval(this.runningTime)
         this.time= 0;
         this.countDown = this.getAttribute('seconds') || 5;
-        
+        this.countDownMsg.textContent = "";
         this.timeDisplay.textContent = ` ${this.time.toFixed(2)}`;
         this.startBtn.disabled = false;
     }
