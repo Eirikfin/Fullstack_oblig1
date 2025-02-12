@@ -1,10 +1,11 @@
+import { fireEvent } from "./eventfire.js";
+
 export default class CountdownTimer extends HTMLElement {
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
   
       // properties:
-      this.clocktimer = ['ready', 'set', 'GO!'];
       this.time = 0;
       this.countDown = this.getAttribute('seconds') || 5;
   
@@ -26,13 +27,16 @@ export default class CountdownTimer extends HTMLElement {
     }
     // methods:
     startRace() {
-        let countdownIndex = 0;
+    
+        this.startBtn.disabled = true;
+       
     
         // Show "ready, set, GO!" messages before starting the timer
         const countdownInterval = setInterval(() => {
-          if (countdownIndex < this.clocktimer.length) {
-            this.countDownMsg.textContent = this.clocktimer[countdownIndex];
-            countdownIndex++;
+          if (this.countDown > 0){
+            this.countDownMsg.textContent = this.countDown;
+            this.countDown--;
+          
           } else {
             clearInterval(countdownInterval);
             this.countDownMsg.textContent = ""; // Clear message after GO!
@@ -41,18 +45,22 @@ export default class CountdownTimer extends HTMLElement {
         }, 1000);
       }
     startTimer() {
-       
+       fireEvent("start-race")
         this.runningTime = setInterval(() => {
     
         this.time += 0.01; 
         this.timeDisplay.textContent = `${this.time.toFixed(2)}`;
       }, 10);
-      this.startBtn.disabled = true;
+      
     
     }
     resetTimer(){
+        fireEvent("reset-race")
+
         clearInterval(this.runningTime)
         this.time= 0;
+        this.countDown = this.getAttribute('seconds') || 5;
+        
         this.timeDisplay.textContent = ` ${this.time.toFixed(2)}`;
         this.startBtn.disabled = false;
     }
@@ -74,4 +82,3 @@ export default class CountdownTimer extends HTMLElement {
   }
   
   customElements.define("countdown-timer", CountdownTimer);
-  
