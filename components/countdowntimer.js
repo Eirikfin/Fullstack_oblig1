@@ -61,6 +61,7 @@ export default class CountdownTimer extends HTMLElement {
 
     stopTimer() {
       clearInterval(this.runningTime);
+      fireEvent("winning-time", this.time.toFixed(2));
     }
 
     resetTimer(){
