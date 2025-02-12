@@ -7,11 +7,12 @@ export default class Racehorse extends HTMLElement{
         
         //properties:
 
-        this.horsename = this.getAttribute("name");
+        this.horsename = this.getAttribute("name") || "just a horse";
         this.keyInput = this.getAttribute("key");
         this.position = 0;
         this.raceStarted = false;
         this.raceFinished = false;
+        
 
 
         this.attachShadow({mode: "open"})
@@ -64,7 +65,7 @@ export default class Racehorse extends HTMLElement{
     finishRace(){
         if(!this.raceFinished && this.position > 80){
             this.raceFinished = true;
-            fireEvent("race-finished");
+            fireEvent("race-finished", this.horsename);
            
         } else{
             return
