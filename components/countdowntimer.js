@@ -26,11 +26,11 @@ export default class CountdownTimer extends HTMLElement {
     this.resetBtn.addEventListener("click", () =>{this.resetTimer()});
     }
     // methods:
+
     startRace() {
         //disable button when it is clicked
         this.startBtn.disabled = true;
-       
-    
+      
        //start the countdown
         const countdownInterval = setInterval(() => {
           //check if countdown is bigger than 0:
@@ -45,6 +45,7 @@ export default class CountdownTimer extends HTMLElement {
           }
         }, 1000);
       }
+
     startTimer() {
        fireEvent("start-race")
         this.runningTime = setInterval(() => {
@@ -55,6 +56,7 @@ export default class CountdownTimer extends HTMLElement {
       
     
     }
+
     resetTimer(){
         fireEvent("reset-race")
 
@@ -65,8 +67,8 @@ export default class CountdownTimer extends HTMLElement {
         this.timeDisplay.textContent = ` ${this.time.toFixed(2)}`;
         this.startBtn.disabled = false;
     }
+
     render() {
-    
     
       this.shadowRoot.innerHTML = `
         <div>
