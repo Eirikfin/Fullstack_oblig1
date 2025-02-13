@@ -35,7 +35,9 @@ export default class Racehorse extends HTMLElement{
                 position: relative;
                 left: ${this.position}%;
             }
-            
+            ::self{
+                background-color: green;
+            }
             </style>
 
 
@@ -75,19 +77,6 @@ export default class Racehorse extends HTMLElement{
           }
         })
     }
-   
-   
-   /*
-    finishRace(){
-        //if race is not finished and a horse has reached the finish line:
-        if(!this.raceFinished && this.position > 80){
-            this.raceFinished = true; // race finished, horses can no longer move
-            fireEvent("race-finished", this.horsename); //fire event with the winner horse
-           
-        } else{
-            return
-        }
-    }*/
 }
 
 customElements.define("race-horse", Racehorse);
