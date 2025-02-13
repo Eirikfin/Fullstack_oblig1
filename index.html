@@ -8,15 +8,16 @@
     <script type="module" defer src="components/countdowntimer.js"></script>
     <script type="module" defer src="components/racetrack.js"></script>
     <script type="module" defer src="components/racehorse.js"></script>
+    <script src="components/listenallevent.js"></script>
     
 </head>
 <body>
-    <countdown-timer seconds="10"></countdown-timer>
+    <countdown-timer seconds="5"></countdown-timer>
 
     <race-track>
-        <race-horse key="w"></race-horse>
+        <race-horse name="carlos" key="w"></race-horse>
         <race-horse name="steve" key="a"></race-horse>
-        <race-horse key="s"></race-horse>
+        <race-horse name="aleksei" key="s"></race-horse>
         <race-horse key="d"></race-horse>
       
     </race-track>
@@ -31,7 +32,6 @@
         const customEvent = new Event("event--here");
     document.dispatchEvent(customEvent);
 */
-
 
     </script>
 </body>
