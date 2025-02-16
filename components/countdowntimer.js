@@ -78,14 +78,46 @@ export default class CountdownTimer extends HTMLElement {
     render() {
     
       this.shadowRoot.innerHTML = `
-        <div>
-          <h1>Countdown Timer:</h1>
+      <style>
+        :host{
+          border: solid black 2px;
+          border-radius: 20px;
+          padding: 40px;
+          background-color: white;
+        }
+        p {
+          font-weight: bold;
+          font-size: 2rem;
+        }
+        #clock{
+          font-size: 3rem;
+        }
+        #countdown-msg{
+        font-size: 5rem;
+        text-align: center;
+        margin:auto;
+        }
+        section{
+          display: flex;
+          gap: 1em;
+        }
+        button{
+          width: 80%;
+          height: 40px;
+          border-radius: 20px;
+        }
+      
+      </style>  
+      
+      <div>
+          <h2>Countdown Timer:</h2>
           <p id="timer">time: <span id="clock">${this.time.toFixed(2)}</span></p>
           <p id="countdown-msg"></p>
             
+          <section>
           <button id="start-button">Start</button>
           <button id="reset-button">Reset</button>
-        
+          </section>
           </div>
       `;
     }

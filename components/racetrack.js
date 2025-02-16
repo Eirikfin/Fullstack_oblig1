@@ -21,25 +21,35 @@ export default class RaceTrack extends HTMLElement{
         this.shadowRoot.innerHTML = `
             <style>
 
-                div {
+                :host {
                 margin: 0 auto;
-                width: 90%;
+                width: 100%;
+                overflow: hidden;
+                }
+                div {          
                 background-color: #C4A484;
                 color: white;
                 position: relative;
                 z-index: 1;
             }
-                div .finishline {
+                .finishline {
                     position: absolute;
-                    left: 90%;
+                    left: 91%;
                     width: 5px;
                     background-color: yellow;
                     height: 100%;
                     z-index: 2;
+                
                 }
-                div > 
-            </style>
-            <h2>The race track:</h2>  
+                p {
+                    font-size: 2rem;
+                    color: white;
+                    font-weight: bold;
+                }
+                span{
+                    color: yellow;
+                }
+            </style> 
             <div> 
             <span class="finishline"></span>
             <slot></slot> 
@@ -68,10 +78,15 @@ export default class RaceTrack extends HTMLElement{
     displayWinner(){
         document.addEventListener("race-finished", (e) => {
             this.shadowRoot.querySelector('#race-winner').textContent = e.detail;
+            const winner = document.createElement("li")
+            winner.innerHTML = `the winner was ${e.detail}!`
+
+            document.getElementById("history-container").appendChild(winner);
         })
 
-        document.addEventListener("winning-time", (e) => {
+            document.addEventListener("winning-time", (e) => {
             this.shadowRoot.querySelector('#winning-time').textContent = e.detail;
+           
         })
 
     }

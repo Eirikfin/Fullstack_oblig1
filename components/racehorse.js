@@ -6,12 +6,13 @@ export default class Racehorse extends HTMLElement{
         super()
         
         //properties:
-
         this.horsename = this.getAttribute("name") || "this is a horse";
         this.keyInput = this.getAttribute("key");
+        this.horseSymbol = this.getAttribute("symbol") || "🦖";
         this.position = 0; //start position for the horses
         this.raceStarted = false;
         this.raceFinished = false;
+      
         
 
 
@@ -21,8 +22,14 @@ export default class Racehorse extends HTMLElement{
 
      
     connectedCallback() {
+     
+        this.horsename = this.getAttribute("name") || "this is a horse";
+        this.keyInput = this.getAttribute("key");
+        this.horseSymbol = this.getAttribute("symbol") || "🦖";
+
+
         this.moveHorse();
-      
+        this.render()
 
     }
     
@@ -31,17 +38,31 @@ export default class Racehorse extends HTMLElement{
     render(){
         this.shadowRoot.innerHTML = `
             <style>
+            
+            .container{
+                border: solid white 5px;
+            }
+
             div {
                 position: relative;
                 left: ${this.position}%;
+                margin-left: 10px;
             }
-            ::self{
-                background-color: green;
+            span {
+                font-size: 2.2rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+                font-weight: bold;
             }
             </style>
 
-
-            <div>${this.horsename}</div>
+            <article class="container">
+            <div><p><span>${this.horseSymbol}</span> <-- ${this.horsename} </p>
+           
+                <p>press "${this.keyInput}" to move </p>
+            </div></article>
         `;
         // this.finishRace();
     }
@@ -68,7 +89,7 @@ export default class Racehorse extends HTMLElement{
         document.addEventListener("keyup", (e) => {
           
           if(this.raceStarted && e.key === this.keyInput){
-            this.position += 1 ; //horse move with 1%
+            this.position += 1 ; //horse move right with 1%
             this.render();
 
 
